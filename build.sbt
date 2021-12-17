@@ -1,6 +1,6 @@
 name := "pmml4s"
 
-version := "0.9.13"
+version := "0.9.14-SNAPSHOT"
 
 organization := "org.pmml4s"
 
@@ -56,13 +56,19 @@ com.typesafe.sbt.pgp.PgpKeys.publishSignedConfiguration := com.typesafe.sbt.pgp.
 publishLocalConfiguration := publishLocalConfiguration.value.withOverwrite(isSnapshot.value)
 com.typesafe.sbt.pgp.PgpKeys.publishLocalSignedConfiguration := com.typesafe.sbt.pgp.PgpKeys.publishLocalSignedConfiguration.value.withOverwrite(isSnapshot.value)
 
+// Artifactory
+val username        = sys.env.getOrElse("ARTIFACTORY_USERNAME", "missing-ARTIFACTORY_USERNAME")
+val password        = sys.env.getOrElse("ARTIFACTORY_PASSWORD", "missing-ARTIFACTORY_PASSWORD") // API token
+val artifactoryHost = "eu.artifactory.swg-devops.com"
+
 publishTo := {
-  val nexus = "https://oss.sonatype.org/"
+  val artifactory = s"https://${artifactoryHost}/"
   if (version.value.trim.endsWith("SNAPSHOT"))
-    Some("snapshots" at nexus + "content/repositories/snapshots")
+    Some("snapshots" at artifactory + "/artifactory/hyc-odm-snapshot-maven-local")
   else
-    Some("releases" at nexus + "service/local/staging/deploy/maven2")
+    Some("releases" at artifactory + "/artifactory/hyc-odm-release-maven-local")
 }
+credentials += Credentials("Artifactory Realm", artifactoryHost, s"${username}", s"${password}")
 
 pomIncludeRepository := { _ => false }
 
