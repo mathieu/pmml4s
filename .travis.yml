@@ -17,3 +17,17 @@ cache:
   directories:
     - $HOME/.ivy2/cache
     - $HOME/.sbt/boot
+
+deploy:
+  # publish from master
+  - provider: script
+    script: sbt clean publish
+    skip_cleanup: true
+    on:
+      branch: develop
+  # publish from tags, aka releases
+  - provider: script
+    script: sbt clean publish
+    skip_cleanup: true
+    on:
+      tags: true
