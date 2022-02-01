@@ -30,7 +30,7 @@ libraryDependencies ++= {
     "org.apache.commons" % "commons-math3" % "3.6.1",
     "org.apache.commons" % "commons-text" % "1.9",
     "io.spray" %% "spray-json" % "1.3.6",
-    "org.scalatest" %% "scalatest" % "3.2.11" % "test",
+    "org.scalatest" %% "scalatest" % "3.0.9" % "test",
     "junit" % "junit" % "4.13.2" % "test"
   )
 }
