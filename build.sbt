@@ -20,7 +20,7 @@ scalacOptions in(Compile, doc) := Seq("-no-link-warnings")
 
 scalaVersion := "2.12.15"
 
-crossScalaVersions := Seq("2.12.11", "2.11.12", "2.13.1", "2.10.7")
+crossScalaVersions := Seq("2.12.15", "2.11.12", "2.13.1", "2.10.7")
 
 libraryDependencies ++= {
   (CrossVersion.partialVersion(scalaVersion.value) match {
